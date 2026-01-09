@@ -4,10 +4,10 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { DarkNavTheme, LightNavTheme } from "../constants/navigationTheme";
+import { DarkNavTheme, LightNavTheme } from "../../constants/navigationTheme";
 
 export const unstable_settings = {
-  anchor: "(tabs)",
+  anchor: "(auth)",
 };
 
 export default function RootLayout() {
@@ -31,13 +31,9 @@ export default function RootLayout() {
               : LightNavTheme.colors.text,
         }}
       >
-        <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="dashboard" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="modal"
-          options={{ presentation: "modal", title: "Modal" }}
-        />
+        <Stack.Screen name="register" options={{ headerShown: false }} />
+        <Stack.Screen name="login" options={{ headerShown: false }} />
+
       </Stack>
 
       <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
