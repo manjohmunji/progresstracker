@@ -2,12 +2,12 @@ import { useTheme } from "@react-navigation/native";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
-    Alert,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput
 } from "react-native";
 
 export default function LoginScreen({ navigation } : { navigation: any }) {
@@ -66,7 +66,7 @@ export default function LoginScreen({ navigation } : { navigation: any }) {
       </Pressable>
 
       {/* Link to Register */}
-      <Pressable onPress={() => router.push("../dashboard/dashboard.tsx")}>
+      <Pressable onPress={() => router.push("/(auth)/register")}>
         <Text style={[styles.registerText, { color: colors.text }]}>
           Don't have an account? Register
         </Text>

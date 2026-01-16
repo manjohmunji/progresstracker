@@ -43,7 +43,7 @@ export default function OnboardingScreen() {
           styles.button,
           { backgroundColor: COLORS.primary }
         ]}
-        onPress={() => router.push("../(auth)/register.tsx")}
+        onPress={() => router.push("/(auth)/register")}
       >
         <Text style={styles.buttonText}>Get Started</Text>
       </Pressable>

@@ -2,12 +2,12 @@ import { useTheme } from "@react-navigation/native";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
-    Alert,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput
 } from "react-native";
 
 export default function RegisterScreen({ navigation }: { navigation: any }) {
@@ -35,7 +35,7 @@ export default function RegisterScreen({ navigation }: { navigation: any }) {
       `Account created for ${username} (${email})!`,
       [
         { text: "Continue",
-             onPress: () => router.push("../dashboard/dashboard.tsx")
+             onPress: () => router.push("/dashboard/dashboard")
              }    
       
       ]
@@ -113,7 +113,7 @@ export default function RegisterScreen({ navigation }: { navigation: any }) {
       </Pressable>
 
       {/* Already have account */}
-      <Pressable onPress={() => navigation.navigate("Login")}>
+      <Pressable onPress={() => router.push("/(auth)/login")}>
         <Text style={[styles.loginText, { color: colors.text }]}>
           Already have an account? Login
         </Text>
