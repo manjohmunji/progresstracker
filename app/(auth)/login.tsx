@@ -62,7 +62,8 @@ export default function LoginScreen({ navigation } : { navigation: any }) {
         style={[styles.button, { backgroundColor: colors.primary }]}
         onPress={handleLogin}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}
+         onPress={() => router.push("/screen/pdf-progress")}>Login</Text>
       </Pressable>
 
       {/* Link to Register */}

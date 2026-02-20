@@ -1,26 +1,34 @@
 import { useTheme } from "@react-navigation/native";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function PDFProgress() {
   const { colors } = useTheme();
 
   const pdfs = [
-    { title: "Math Notes", pagesRead: 40, totalPages: 120 },
-    { title: "Physics Notes", pagesRead: 60, totalPages: 90 },
-    { title: "Chemistry Notes", pagesRead: 30, totalPages: 75 },
+    { title: "case study", pagesRead: 40, totalPages: 120 },
+    { title: "information system", pagesRead: 60, totalPages: 90 },
+    { title: "law", pagesRead: 30, totalPages: 75 },
   ];
 
   return (
+    <SafeAreaView style={{ flex: 1 }}>
     <ScrollView
       contentContainerStyle={[
         styles.container,
         { backgroundColor: colors.background },
       ]}
     >
+      <View style={{ padding: 20 }}>
+        <TouchableOpacity style={styles.title}>
+          <Text style={{ color: colors.text }}>?</Text>
+        </TouchableOpacity>
+      
       <Text style={[styles.title, { color: colors.text }]}>
         PDF Progress
       </Text>
-
+         </View>
       {pdfs.map((pdf, index) => {
         const percent = Math.round(
           (pdf.pagesRead / pdf.totalPages) * 100
@@ -51,6 +59,7 @@ export default function PDFProgress() {
         );
       })}
     </ScrollView>
+    </SafeAreaView>
   );
 }
 

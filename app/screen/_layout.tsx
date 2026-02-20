@@ -33,6 +33,7 @@ export default function RootLayout() {
       >
         <Stack.Screen name="upload-pdf" options={{ headerShown: false }} />
                <Stack.Screen name="pdf-progress" options={{ headerShown: false }} />
+               <Stack.Screen name="index" options={{ headerShown: false }} />
 
 
       </Stack>

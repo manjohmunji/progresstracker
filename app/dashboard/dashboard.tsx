@@ -1,16 +1,31 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
-import { router } from "expo-router";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ReadingTracker from "../../components/ReadingTracker";
+type TabType = "dashboard" | "pdf-progress" | "upload-pdf";
 
 export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState<TabType>("dashboard");
   const { colors } = useTheme();
 
   const userName = "steph";
   const progress = 45;
+  
 
-  return (
+  // ---------------- DASHBOARD TAB ----------------
+  const renderDashboardTab = () => (
+    
     <SafeAreaView style={{ flex: 1 }}>
+      <ReadingTracker />
       <ScrollView
         contentContainerStyle={[
           styles.container,
@@ -21,7 +36,7 @@ export default function Dashboard() {
           Welcome, {userName}!
         </Text>
 
-        {/* Progress Summary */}
+        {/* Progress Section */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Overall Reading Progress
@@ -41,7 +56,7 @@ export default function Dashboard() {
           </Text>
         </View>
 
-        {/* Portals */}
+        {/* Actions Section */}
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Actions
@@ -49,7 +64,7 @@ export default function Dashboard() {
 
           <Pressable
             style={[styles.portalCard, { backgroundColor: colors.card }]}
-            onPress={() => router.push("/screen/upload-pdf")}
+            onPress={() => setActiveTab("upload-pdf")}
           >
             <Text style={[styles.portalTitle, { color: colors.text }]}>
               Upload PDF
@@ -61,7 +76,7 @@ export default function Dashboard() {
 
           <Pressable
             style={[styles.portalCard, { backgroundColor: colors.card }]}
-            onPress={() => router.push("/screen/pdf-progress")}
+            onPress={() => setActiveTab("pdf-progress")}
           >
             <Text style={[styles.portalTitle, { color: colors.text }]}>
               Track PDF Progress
@@ -74,8 +89,94 @@ export default function Dashboard() {
       </ScrollView>
     </SafeAreaView>
   );
+
+  // ---------------- PDF PROGRESS TAB ----------------
+  const renderPdfProgressTab = () => (
+    <View style={styles.center}>
+      <Text style={styles.placeholderText}>PDF Progress Screen</Text>
+    </View>
+  );
+
+  // ---------------- UPLOAD PDF TAB ----------------
+  const renderUploadPdfTab = () => (
+    <View style={styles.center}>
+      <Text style={styles.placeholderText}>Upload PDF Screen</Text>
+    </View>
+  );
+
+  // ---------------- MAIN RETURN ----------------
+  return (
+    <View style={styles.container1}>
+      <View style={styles.content}>
+        {activeTab === "dashboard" && renderDashboardTab()}
+        {activeTab === "pdf-progress" && renderPdfProgressTab()}
+        {activeTab === "upload-pdf" && renderUploadPdfTab()}
+      </View>
+
+      {/* Bottom Tab Bar */}
+      <View style={styles.tabBar}>
+        <TouchableOpacity
+          style={styles.tabButton}
+          onPress={() => setActiveTab("dashboard")}
+        >
+          <FontAwesome
+            name="home"
+            size={22}
+            color={activeTab === "dashboard" ? "#007AFF" : "#666"}
+          />
+          <Text
+            style={[
+              styles.tabButtonText,
+              activeTab === "dashboard" && styles.activeTabText,
+            ]}
+          >
+            Home
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.tabButton}
+          onPress={() => setActiveTab("pdf-progress")}
+        >
+          <FontAwesome
+            name="file-pdf-o"
+            size={22}
+            color={activeTab === "pdf-progress" ? "#007AFF" : "#666"}
+          />
+          <Text
+            style={[
+              styles.tabButtonText,
+              activeTab === "pdf-progress" && styles.activeTabText,
+            ]}
+          >
+            Progress
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.tabButton}
+          onPress={() => setActiveTab("upload-pdf")}
+        >
+          <FontAwesome
+            name="upload"
+            size={22}
+            color={activeTab === "upload-pdf" ? "#007AFF" : "#666"}
+          />
+          <Text
+            style={[
+              styles.tabButtonText,
+              activeTab === "upload-pdf" && styles.activeTabText,
+            ]}
+          >
+            Upload
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
+// ---------------- STYLES ----------------
 const styles = StyleSheet.create({
   container: { padding: 20 },
   welcome: { fontSize: 24, fontWeight: "700", marginBottom: 20 },
@@ -98,4 +199,40 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 4,
   },
+  container1: {
+    flex: 1,
+    backgroundColor: "#f7f7f7",
+  },
+  content: {
+    flex: 1,
+  },
+  tabBar: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 12,
+    borderTopWidth: 1,
+    borderColor: "#ddd",
+    backgroundColor: "#fff",
+  },
+  tabButton: {
+    alignItems: "center",
+  },
+  tabButtonText: {
+    fontSize: 12,
+    color: "#666",
+  },
+  activeTabText: {
+    color: "#007AFF",
+    fontWeight: "600",
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  placeholderText: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
 });
+
